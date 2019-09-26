@@ -1,5 +1,27 @@
 ﻿Function Tee-StreamRecords {
+<#
+.Synopsis
+   Function to Process Redirected PowerShell Streams and provide a Handler for each Record Object
+.DESCRIPTION
+   Lange Beschreibung
+.EXAMPLE
+   Function to Process Redirected PowerShell Streams and provide a Handler for each Record Object
+   With a Redirection Operator of  *>&1 you can Handle ALL PowerShell Streams in one Function.
+   
+   So you can do further Processing of all PowerShell Streams
+   for Example you can do any kind of Logging with the Stream Objects 
+   
+.EXAMPLE
+  #log all ErrorRecord Objects to "$env:temp\my.log"
+  Get-ChildItem 'C:\Windows' -recurse *>&1 | Tee-StreamRecords -ErrorHandler { $Args[0] | Out-File "$env:temp\my.log" }
 
+.Link
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
+
+.Notes
+   Author: Peter Kriegel
+   Version: 1.0.0 26.September.2019 (Inital release)
+#>
     [CmdletBinding()]
     param(
 
@@ -63,6 +85,3 @@
     }
     End{}
 }
-
-# log all ErrorRecord Objects to "$env:temp\my.log"
-Get-ChildItem 'C:\Windows' -recurse *>&1 | Tee-StreamRecords -ErrorHandler { $Args[0] | Out-File "$env:temp\my.log" }
