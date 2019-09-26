@@ -80,12 +80,12 @@ PowerShell is pushing data into these streams in 3 different ways:
 - using the Cmdlets:  Write-Error, Write-Warning Write-Debug, Write-Verbose, Write-Host, Write-Progress, Write-Output
 - Inside an advanced function which is using of the [Cmdletbinding()] attribute, the $PSCmdlet automatic variable exist as an object which has a type of  System.Management.Automation.PSScriptCmdlet. With this object you can use the following methods to push messages to the corresponding streams:
 
-- $PSCmdlet.WriteDebug()
-- $PSCmdlet.WriteError()
-- $PSCmdlet.WriteObject()
-- $PSCmdlet.WriteProgress()
-- $PSCmdlet.WriteVerbose()
-- $PSCmdlet.WriteWarning()
+ $PSCmdlet.WriteDebug()
+ $PSCmdlet.WriteError()
+ $PSCmdlet.WriteObject()
+ $PSCmdlet.WriteProgress()
+ $PSCmdlet.WriteVerbose()
+ $PSCmdlet.WriteWarning()
 
 - All other Cmdlets developd in a .NET Language, can use their corresponding internal .writeXxxx() methods
 
@@ -104,11 +104,11 @@ Called the xxxRecord Objects.
 |Debug Stream|System.Management.Automation.DebugRecord|
 |Information Stream|System.Management.Automation.InformationRecord|
 
-WarningRecord, VerboseRecord, and DebugRecord are transporting only a String Message and
-a InvocationInfo Object
-The InvocationInfo Object can be used to detekt the source of the event.
-
 #### Inconsistent object design!
+
+WarningRecord, VerboseRecord, and DebugRecord are transporting only a String Message and
+a InvocationInfo Object.
+The InvocationInfo Object can be used to detekt the source of the event.
 
 ErrorRecord is transporting an rich Object with many informations about
 
