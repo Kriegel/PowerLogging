@@ -492,24 +492,3 @@ Function Out-LogFile {
 
   End {}
 }
-
-Out-LogFile -InputObject 'Hello Plain World' -MessageFormat Plain -Append -Verbose
-Out-LogFile -InputObject 'Hello VerbosePlain World' -MessageFormat VerbosePlain -Append -Verbose
-Out-LogFile -InputObject 'Hello CMTrace World' -MessageFormat CMTrace -Append -Verbose
-Out-LogFile -InputObject 'Hello Trace32 World' -MessageFormat Trace32 -Append -Verbose
-Out-LogFile -InputObject 'Hello JSON World' -MessageFormat JSON -Append -Verbose
-Out-LogFile -InputObject 'Hello XML World' -MessageFormat XML -Append -Verbose
-
-
-#Out-LogFile -Message 'Wer Weiss wass?' -Indent 12 -MessageFormat VerbosePlain -EventSource 'Von Mir!' -Level Warning -NoStreamWriting -FilePath "$env:Temp\PowerShellWriteLog.log" -Append -Verbose
-#Notepad.exe "$env:Temp\PowerShellWriteLog.log"
-
-<#
-  TimeStamp:
-  https://www.loggly.com/docs/timestamps/
-
-  Syslog:
-  https://tools.ietf.org/html/rfc5424
-  TimeStamp see: 6.2.3.1.  Examples
-    Example 3  is like Format:   1985-04-12T19:20:50.52-04:00
-#>
