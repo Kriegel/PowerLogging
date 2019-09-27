@@ -1,14 +1,19 @@
 # PowerLogging
 Universal approach to PowerShell event Logging
 
-Iam an simple minded Windowes Administrator and I like simply logging to a file very much. 
+I am an simple minded Windows Administrator and I like the simpl approach to log events to a file very much. 
+
+
+Because it is not allways possible to transport and load a module with a scrip,
 Since the first release of PowerShell 2.0 I searched an universal, non module approach to simple log PowerShell events.
 
-Because it is not allways possible to transport and load a module with a script,
-non Mudule means that I want to use PowerShell buildin processing instead of loading an additional module.
-IMy desire is to (re)use the events created by the Write-xxx cmdlets to do a simple Logfile or other consumer.
+Non Module means that I want to use PowerShell build in processing, instead of loading an additional module.
+My desire is to (re)use the events, created by the Write-xxx cmdlets to do a simple Logfile or to log to other consumer.
 
-Now I think I found one. Ugly but needful for daily use in quick n dirty admin scripts.
+Now I think I found one solution,
+with redirection of the PowerShell Streams to the success Stream and then Filter and process the different Objects produced by the Write-xxxx cmdlets to the Streams.
+
+Ugly but needful for daily use, in quick and dirty admin scripts.
 
 ## Logging
 
