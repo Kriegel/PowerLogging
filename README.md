@@ -19,18 +19,60 @@ Ugly but needful for daily use, in quick and dirty admin scripts.
 
 In computing, a logfile (or simply log) is a file that records either the events which happen while an operating system or other software runs. (Excerpt: http://en.wikipedia.org/wiki/Logfile)
 
-Logging can even be done with Databases or other Log-Event consumer like Unix / Linux syslog, Rsyslog, Windows Event Log or on Apple McOs the unified logging system.
+Logging can even be done with Databases or other Log-Event consumer like Unix / Linux syslog or Rsyslog, Windows Event Log or on Apple macOS the unified logging system.
+
+This Loggin approch addresses Windows, unix / Linux and macOS.
 
 ## Parts of a data log-entry
 
 A log message without context information is often as useful as no log message at all!
 The properties of an log-entry should answer the following questions: What? , When? , Where?, Who?, Importance?
-So every log-entry consist of common parts
+So every log-entry consist of common data fields.
 
 - Text description of the event ; called Message
 - weighting of the event (importance) ; called severity
-- Time and date ; called TimeStamp
+- Time and date ; called TimeStamp (in UTC string Format!)
 - Locality ; called Source
+
+### Other context parts of a log-entry
+
+A developer has the need to debug or trace application events,
+in computer security forensic the needs are other.
+So the parts of a log-entry may vary.
+A log-entry cannot satisfy all demands and should be consistent.
+
+For PowerShell events, reasonable additional data fields are:
+
+- Computername (full DNS Name)
+- Username (full DNS Name)
+- ProcessName
+- Path to Process Executeable
+- Process ID
+- ProcessThread ID
+- PowerShell Command Name (from InvocationInfo Object)
+- PowerShell ScriptPath Name (fullpath from InvocationInfo Object)
+- PowerShell ScriptLineNumber (from InvocationInfo Object)
+- PowerShell Offset in ScriptLine (from InvocationInfo Object)
+
+most of this data fields can be processed into one event source path like so:
+
+ComputerName\UserName\ScriptPath\CommandName\ScriptLineNumber\OffsetInLine\Processname\ProcessID\TreadID\ExecuteablePath
+
+### Excursion : TimeStamp
+
+Even if it call TimeStamp it contains Date and Time.
+International enterprises have servers spread across multiple timezones.
+So all your event timestamps MUST be transported in UTC time (as String)
+This UTC MUST be calculated by the sender system and cannot be calculated by the receiver system.
+Because only the sender knows his locale timezone setting and dailight savings
+create the time as UTC formated string (Trace32 / CMTrace format)
+
+I am using the UTC DateTime format of HH:mm:ss.mmm-+<UtcOffset.TotalMinutes>
+Which can be created by PowerShell like so:
+```powershell
+$Now = Get-Date
+"$($Now.ToString('HH:mm:ss.fff'))$([System.TimeZoneInfo]::Local.GetUtcOffset($Now).TotalMinutes.ToString('+0;-#'))"
+```
 
 ## Further logging needs
 
