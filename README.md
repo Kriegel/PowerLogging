@@ -1,15 +1,20 @@
 # PowerLogging
-Universal approach to PowerShell Logging
+Universal approach to PowerShell event Logging
 
-Since the first release of PowerShell 2.0 I searched an universal, non module approach to simple log PowerShell events create by the Write-xxx cmdlets to a simple Logfile or other consumer.
+Iam an simple minded Windowes Administrator and I like simply logging to a file very much. 
+Since the first release of PowerShell 2.0 I searched an universal, non module approach to simple log PowerShell events.
+
+Because it is not allways possible to transport and load a module with a script,
+non Mudule means that I want to use PowerShell buildin processing instead of loading an additional module.
+IMy desire is to (re)use the events created by the Write-xxx cmdlets to do a simple Logfile or other consumer.
 
 Now I think I found one. Ugly but needful for daily use in quick n dirty admin scripts.
 
 ## Logging
 
-In computing, a logfile (or simply log) is a file that records either the events which happen while an operating system or other software runs, or the personal messages between different users of communication software. (Excerpt: http://en.wikipedia.org/wiki/Logfile)
+In computing, a logfile (or simply log) is a file that records either the events which happen while an operating system or other software runs. (Excerpt: http://en.wikipedia.org/wiki/Logfile)
 
-Logging can even be done with Databases or other Log-Event consumer.
+Logging can even be done with Databases or other Log-Event consumer like Unix / Linux syslog, Rsyslog, Windows Event Log or on Apple McOs the unified logging system.
 
 ## Parts of a data log-entry
 
