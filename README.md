@@ -1,7 +1,7 @@
 # PowerLogging
 Universal approach to PowerShell event Logging
 
-I am an simple minded Windows Administrator and I like the simpl approach to log events to a file very much. 
+I am an simple minded Windows Administrator and I like the simpel approach to log events to a file very much. 
 
 
 Because it is not allways possible to transport and load a module with a scrip,
