@@ -152,3 +152,17 @@ Export the stream record object into a Text Logfile in various formats
 - XML
 
 Put the Out-Logfile on top of your script instead of loading a module and by happy with Textfile Logging.
+
+## See Also
+about_Logging_Windows
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows
+
+about_Logging_Non-Windows
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_non-windows
+
+On Linux, PowerShell logs to syslog and rsyslog.conf For more information, see:
+https://en.wikipedia.org/wiki/Syslog#Internet_standard_documents
+https://www.rsyslog.com/doc/master/index.html
+
+On macOS, the os_log logging system is used. For more information, see
+https://developer.apple.com/documentation/os/logging
