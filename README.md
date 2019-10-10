@@ -196,19 +196,19 @@ https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/abo
 
 # Log all PowerShell Streams with one Function
 
-If you use the rediriction Operator *>&1 with in combination with Invoke-StreamRecordFilter
+If you use the redirection Operator `*>&1` in combination with `Invoke-StreamRecordFilter`
 
-Look into my Invoke-StreamRecordFilter.ps1 Function and you get a clou how Powerfull redirection is.
+Look into my 'Invoke-StreamRecordFilter.ps1' Function and you get a clou how Powerfull redirection is.
 
 The Function can be used to filter the record stream Objects and to execute an scriptblock for each type of record Object so you can Log them to annywhere or do ANY other processing to them!
 
 # A special Out-Logfile function
 
-The Story goes then on with the Out-Logfile.ps1 Function
+The Story goes then on with the `Out-Logfile` Function
 
-If you use the rediriction Operator *>&1 with in combination with Out-Logfile it will export the stream record objects into a Text Logfile
+If you use the rediriction Operator `*>&1` with in combination with `Out-Logfile` it will export the stream record objects into a Text Logfile
 
- Out-Logfile supports various structured Text formats for the export
+ `Out-Logfile` supports various structured Text formats for the export
 
 - Plain (Text message only)
 - VerbosePlain
@@ -216,7 +216,7 @@ If you use the rediriction Operator *>&1 with in combination with Out-Logfile it
 - JSON
 - XML
 
-Put the Out-Logfile on top of your script instead of loading a module.
+Put the `Out-Logfile` on top of your script instead of loading a module.
 Call `| *>&1 Out-Logfile` at the end of your script and by happy with Textfile Logging.
 
 Example to use Out-Logfile:
