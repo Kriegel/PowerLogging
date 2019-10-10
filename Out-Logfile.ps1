@@ -136,10 +136,30 @@ Function Out-LogFile {
 .PARAMETER WhatIf
   Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
+.EXAMPLE
+    
+    Running a script and Log all stream record Objects as JSON formatted log-entrys
+    
+    
+    # Sript to run
+    # Put it into curly brackets and add & Operator to run the script
+    & {
+        Write-Output good
+        Write-Error bad
+        Write-Warning problematic
+        Write-Verbose palaver -Verbose
+        Write-Information NotImportand -InformationAction Continue
+
+    # Call to Out-Logfile after closing curly bracket with with redirection operator into pipeline
+    } *>&1 | Out-LogFile -FilePath 'C:\Temp\MyLogFile.log' -MessageFormat 'JSON' -NoStreamReWriting -Append
+
+
 .NOTES
   Author: Peter Kriegel
 
-  Version: 1.1.0 From: 23.September.2019
+  Version: 1.1.1 From: 10.October.2019
+        Minor Bugfix, Example added
+    1.1.0 From: 23.September.2019 (Initial relaese)
 
   Credits:
 
@@ -306,7 +326,7 @@ Function Out-LogFile {
 
             # if user has not given an event source -and source ist not text of 'Write-Information'
             # set the Eventsource with source of InformationRecord Object
-            If((-Not [String]::IsNullOrEmpty(($InputObject.InvocationInfo.ScriptName).Trim())) -and ($InputObject.Source -ine 'Write-Information')){
+            If((-Not [String]::IsNullOrEmpty(($EventSource).Trim())) -and ($InputObject.Source -ine 'Write-Information')){
               $LogHash.ScriptName = $InputObject.Source
             }
 
