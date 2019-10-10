@@ -1,4 +1,4 @@
-﻿Function Tee-StreamRecord {
+﻿Function Invoke-StreamRecordFilter {
 <#
 .Synopsis
     Function to Process redirected PowerShell streams and provide a handler for each stream-record Object
@@ -11,7 +11,7 @@
 
 .EXAMPLE
     #log all Stream-Record Objects to "$env:temp\my.log"
-    Get-ChildItem 'C:\Windows' -recurse *>&1 | Tee-StreamRecords -ErrorHandler { $Args[0] | Out-File "$env:temp\my.log" -Append }
+    Get-ChildItem 'C:\Windows' -recurse *>&1 | Invoke-StreamRecordFilters -ErrorHandler { $Args[0] | Out-File "$env:temp\my.log" -Append }
 
 .EXAMPLE
     # create helper function to send record objects down the pipeline
@@ -49,7 +49,7 @@
 
 
     #log all ErrorRecord Objects to "$env:temp\my.log"
-    New-PsStreamRecordObject *>&1 | Tee-StreamRecords -AllHandler { $Args[0] | Out-File "$env:temp\my.log" -Append }
+    New-PsStreamRecordObject *>&1 | Invoke-StreamRecordFilters -AllHandler { $Args[0] | Out-File "$env:temp\my.log" -Append }
 
 .Link
 https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
