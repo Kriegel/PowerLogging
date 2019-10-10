@@ -1,8 +1,8 @@
 # PowerLogging
+
 Universal approach to PowerShell event Logging
 
 I am an simple minded Windows Administrator and I like the simple approach to log events to a file very much. 
-
 
 Because it is not allways possible to transport and load a module with a script,
 Since the first release of PowerShell 2.0 I searched an universal, non module approach to simple log PowerShell events.
@@ -77,6 +77,7 @@ create the time as UTC formated string (Trace32 / CMTrace format)
 
 I am using the UTC DateTime format of HH:mm:ss.mmm-+<UtcOffset.TotalMinutes>
 Which can be created by PowerShell like so:
+
 ```powershell
 $Now = Get-Date
 "$($Now.ToString('HH:mm:ss.fff'))$([System.TimeZoneInfo]::Local.GetUtcOffset($Now).TotalMinutes.ToString('+0;-#'))"
@@ -137,6 +138,7 @@ Windows PowerShell has to offer the following streams which can be addressed by 
 The PowerShell input stream is bound to the stdin or to the scriptfile and is not considered here.
 
 PowerShell is pushing data into these streams in 3 different ways:
+
 - using the Cmdlets:  Write-Error, Write-Warning Write-Debug, Write-Verbose, Write-Host, Write-Progress, Write-Output
 - Inside an advanced function which is using of the [Cmdletbinding()] attribute, the $PSCmdlet automatic variable exist as an object which has a type of  System.Management.Automation.PSScriptCmdlet. With this object you can use the following methods to push messages to the corresponding streams:
 
@@ -164,7 +166,7 @@ Called the xxxRecord Objects.
 |Debug Stream|System.Management.Automation.DebugRecord|
 |Information Stream|System.Management.Automation.InformationRecord|
 
-#### Inconsistent object design!
+#### Inconsistent object design
 
 WarningRecord, VerboseRecord, and DebugRecord are transporting only a String Message and
 a InvocationInfo Object.
@@ -194,16 +196,19 @@ https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/abo
 
 # Log all PowerShell Streams with one Function
 
-Look into my Tee-StreamRecord.ps1 Function and you get a clou how Powerfull redirection is.
+If you use the rediriction Operator *>&1 with in combination with Invoke-StreamRecordFilter
 
-Tee-StreamRecord can be used in the middle of the Pipeline or at the End.
-It can be used to filter Stream Objects, Log them to annywhere or do ANY other processing to them!
+Look into my Invoke-StreamRecordFilter.ps1 Function and you get a clou how Powerfull redirection is.
+
+The Function can be used to filter the record stream Objects and to execute an scriptblock for each type of record Object so you can Log them to annywhere or do ANY other processing to them!
 
 # A special Out-Logfile function
 
-The Story goes then on with the Out-Logfile.ps1 Function ;-)
+The Story goes then on with the Out-Logfile.ps1 Function
 
-Export the stream record object into a Text Logfile in various formats
+If you use the rediriction Operator *>&1 with in combination with Out-Logfile it will export the stream record objects into a Text Logfile
+
+ Out-Logfile supports various structured Text formats for the export
 
 - Plain (Text message only)
 - VerbosePlain
@@ -211,9 +216,27 @@ Export the stream record object into a Text Logfile in various formats
 - JSON
 - XML
 
-Put the Out-Logfile on top of your script instead of loading a module and by happy with Textfile Logging.
+Put the Out-Logfile on top of your script instead of loading a module.
+Call `| *>&1 Out-Logfile` at the end of your script and by happy with Textfile Logging.
+
+Example to use Out-Logfile:
+
+```powershell
+# Sript to run
+# Put it into curly brackets and add & Operator to run the script
+& {
+    Write-Output good
+    Write-Error bad
+    Write-Warning problematic
+    Write-Verbose palaver -Verbose
+    Write-Information NotImportand -InformationAction Continue
+
+# Call to Out-Logfile after closing curly bracket with with redirection operator into pipeline
+} *>&1 | Out-LogFile -FilePath 'C:\Logs\MyLogFile.log' -MessageFormat 'JSON' -NoStreamReWriting -Append
+```
 
 ## See Also
+
 about_Logging_Windows
 https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging_windows
 
