@@ -206,7 +206,7 @@ The Function can be used to filter the record stream Objects and to execute an s
 
 The Story goes then on with the `Out-Logfile` Function
 
-If you use the rediriction Operator `*>&1` with in combination with `Out-Logfile` it will export the stream record objects into a Text Logfile
+If you use the redirection Operator `*>&1` with in combination with `Out-Logfile` it will export the stream record objects into a Text Logfile
 
  `Out-Logfile` supports various structured Text formats for the export
 
